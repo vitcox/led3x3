@@ -460,9 +460,7 @@ void ReadControls() {
   Serial.println(" ");
   ledDelay = P1outputValue;
   framedelay = P2outputValue;
-  delay(2);
-
-
+  
 }
 
 void loop() {
