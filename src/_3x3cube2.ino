@@ -18,13 +18,13 @@ int Wall_Y_Left[3][3][3] = {
                      {0,0,1}, 
                      {0,0,1}   },{ 
                      
-                     {0,0,0},
-                     {0,0,0}, 
-                     {0,0,0}   },{
+                     {0,0,1},
+                     {0,0,1}, 
+                     {0,0,1}   },{
                      
-                     {0,0,0}, 
-                     {0,0,0}, 
-                     {0,0,0}   
+                     {0,0,1}, 
+                     {0,0,1}, 
+                     {0,0,1}   
                      }
                  };
 
@@ -352,7 +352,7 @@ SelectTop();         TopRow( a[2][0][0], a[2][0][1], a[2][0][2]);
 delay(framedelay); //HOW FAST IT GOES TO NEXT FRAME
 };
 
-// READY TO USE ANIMATIONS
+// READY TO USE ANIMATIONS [UpandDown and Elwator are the same, one on the has to be removed to save space]
 void RA_Spinning() {
 
     for(int ramka = 0; ramka < fps; ramka++){   frame(Wall_Diag_Left)    ;}   
@@ -370,8 +370,8 @@ void RA_LeftRight() {
     for(int ramka = 0; ramka < fps; ramka++){   frame(Wall_Y_Middle); } 
     for(int ramka = 0; ramka < fps; ramka++){   frame(Wall_Y_Right);  } 
     for(int ramka = 0; ramka < fps; ramka++){   frame(Wall_Y_Middle); } 
-    for(int ramka = 0; ramka < fps; ramka++){   frame(Wall_Y_Left);   } 
-    for(int ramka = 0; ramka < fps; ramka++){   frame(Wall_Y_Right);  }
+     
+    
 }
 void RA_Spin() {
     for(int ramka = 0; ramka < fps; ramka++){   frame(Wall_Diag_Right) ;}    
@@ -380,14 +380,22 @@ void RA_Spin() {
     for(int ramka = 0; ramka < fps; ramka++){   frame(Wall_X_Middle)   ;} 
     for(int ramka = 0; ramka < fps; ramka++){   frame(Wall_Diag_Right) ;}  
     for(int ramka = 0; ramka < fps; ramka++){   frame(Wall_X_Middle)   ;}
+    for(int ramka = 0; ramka < fps; ramka++){   frame(Wall_Diag_Left)  ;} 
+    for(int ramka = 0; ramka < fps; ramka++){   frame(Wall_X_Middle)   ;}
+   
 }
 void RA_TopBottom() {
     for(int ramka = 0; ramka <fps; ramka++){   frame(Wall_X_Top)     ;}  
     for(int ramka = 0; ramka <fps; ramka++){   frame(Wall_X_Middle)  ;}  
     for(int ramka = 0; ramka <fps; ramka++){   frame(Wall_X_Bottom)  ;}  
-    for(int ramka = 0; ramka <fps; ramka++){   frame(Wall_X_Middle)  ;}  
+    for(int ramka = 0; ramka <fps; ramka++){   frame(Wall_X_Middle)  ;}
+
     for(int ramka = 0; ramka <fps; ramka++){   frame(Wall_X_Top)     ;}  
     for(int ramka = 0; ramka <fps; ramka++){   frame(Wall_X_Middle)  ;}  
+    for(int ramka = 0; ramka <fps; ramka++){   frame(Wall_X_Bottom)  ;}  
+    for(int ramka = 0; ramka <fps; ramka++){   frame(Wall_X_Middle)  ;} 
+
+     
 }
 void RA_UpDown(){
     for(int ramka = 0; ramka < fps; ramka++){   frame(Floor_Bottom);} 
@@ -416,13 +424,27 @@ void RA_Diagonals() {
 }
 
 void loop() {
+/*    RA_Spinning();
     RA_Spinning();
+    RA_Spinning();    
     RA_LeftRight();
-    RA_Spin();      
+    RA_LeftRight();
+    RA_LeftRight(); 
+    RA_Spin();     
+    RA_Spin();     
+    RA_Spin();     
     RA_TopBottom();
+    RA_TopBottom();
+    RA_TopBottom();  
     RA_UpDown();
+    RA_UpDown();
+    RA_UpDown(); 
+    RA_Elevator(); 
     RA_Elevator();
+    RA_Elevator(); */
     RA_Diagonals();
+    RA_Diagonals(); 
+    
 /** DEBUG TO SERIAL FRAME CODE 
 Serial.println("FRAME BEGIN");
 for(int q = 0; q < 3; q++) // RAMKI
