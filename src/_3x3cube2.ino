@@ -1,6 +1,5 @@
-#define ledDelay 1
-#define framedelay 5
-#define fps 8
+
+
 #define d1 2
 #define d2 3
 #define d3 4
@@ -10,6 +9,20 @@
 #define d7 8
 #define d8 9
 #define d9 10
+const int pot1InPin = A4;  // Analog input pin that the potentiometer 1 is attached to
+const int pot2InPin = A5;  // Analog input pin that the potentiometer 2 is attached to
+
+int P1sensorValue = 0;        // value read from the pot
+int P1outputValue = 0;        // value output to the PWM (analog out)
+
+int P2sensorValue = 0;        // value read from the pot
+int P2outputValue = 0;        // value output to the PWM (analog out)
+
+byte ledDelay =  1;
+byte framedelay = 5;
+byte fps =  8;
+
+
 // PATTER DEFINITIONS - bottom, middle, top 
 int Wall_Y_Left[3][3][3] = { 
                      { 
@@ -286,6 +299,8 @@ void setup()
     digitalWrite(A1,HIGH);   // pull up the A1 pin
     digitalWrite(A2,HIGH);   // pull up the A2 pin
 
+
+
     Serial.begin(9600);
       /* add setup code here, setup code runs once when the processor starts */
 }
@@ -349,6 +364,7 @@ SelectMiddle();      TopRow( a[1][0][0], a[1][0][1], a[1][0][2]);
 SelectTop();         TopRow( a[2][0][0], a[2][0][1], a[2][0][2]);
                   MiddleRow( a[2][1][0], a[2][1][1], a[2][1][2]);
                   BottomRow( a[2][2][0], a[2][2][1], a[2][2][2]);
+ReadControls();
 delay(framedelay); //HOW FAST IT GOES TO NEXT FRAME
 };
 
@@ -423,26 +439,53 @@ void RA_Diagonals() {
 
 }
 
+
+void ReadControls() {
+      // read the analog in value:
+  P1sensorValue = analogRead(pot1InPin);
+  P2sensorValue = analogRead(pot2InPin);
+  
+  // map it to the range of the analog out:
+  P1outputValue = map(P1sensorValue, 0, 1023, 0, 100); // last parameter is the upper limit for value, max is 255 but we need only 100 for delays
+  P2outputValue = map(P2sensorValue, 0, 1023, 1, 100);
+  // print the resummmmmmmmmmmmmonitolts to the serial monitor:
+  Serial.print("P1 sensor = ");
+  Serial.print(P1sensorValue);
+  Serial.print("\t P1 output = ");
+  Serial.println(P1outputValue);
+  Serial.print("P2 sensor = ");
+  Serial.print(P2sensorValue);
+  Serial.print("\t P2 output = ");
+  Serial.println(P2outputValue);
+  Serial.println(" ");
+  ledDelay = P1outputValue;
+  framedelay = P2outputValue;
+  delay(2);
+
+
+}
+
 void loop() {
-/*    RA_Spinning();
-    RA_Spinning();
+
     RA_Spinning();    
-    RA_LeftRight();
-    RA_LeftRight();
-    RA_LeftRight(); 
-    RA_Spin();     
-    RA_Spin();     
-    RA_Spin();     
-    RA_TopBottom();
-    RA_TopBottom();
-    RA_TopBottom();  
-    RA_UpDown();
-    RA_UpDown();
-    RA_UpDown(); 
-    RA_Elevator(); 
-    RA_Elevator();
-    RA_Elevator(); */
-    RA_Diagonals();
+    RA_Spinning();    
+    RA_Spinning();    
+    RA_LeftRight();   
+    RA_LeftRight();   
+    RA_LeftRight();   
+    RA_Spin();         
+    RA_Spin();         
+    RA_Spin();         
+    RA_TopBottom();    
+    RA_TopBottom();    
+    RA_TopBottom();    
+    RA_UpDown();    
+    RA_UpDown();    
+    RA_UpDown();    
+    RA_Elevator();  
+    RA_Elevator();  
+    RA_Elevator();  
+    RA_Diagonals(); 
     RA_Diagonals(); 
     
 /** DEBUG TO SERIAL FRAME CODE 
