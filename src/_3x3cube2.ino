@@ -446,7 +446,7 @@ void ReadControls() {
   P2sensorValue = analogRead(pot2InPin);
   
   // map it to the range of the analog out:
-  P1outputValue = map(P1sensorValue, 0, 1023, 0, 100); // last parameter is the upper limit for value, max is 255 but we need only 100 for delays
+  P1outputValue = map(P1sensorValue, 0, 1023, 0 , 100); // last parameter is the upper limit for value, max is 255 but we need only 100 for delays
   P2outputValue = map(P2sensorValue, 0, 1023, 1, 100);
   // print the resummmmmmmmmmmmmonitolts to the serial monitor:
   Serial.print("P1 sensor = ");
